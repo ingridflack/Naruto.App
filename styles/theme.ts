@@ -11,6 +11,12 @@ const theme = {
     primary: "#ff8b38",
     secondary: "#16396b",
   },
+  fontSize: {
+    small: "0.75rem",
+    medium: "0.875rem",
+    normal: "1rem",
+    large: "1.5rem",
+  },
 } as const;
 
 export type Theme = typeof theme;

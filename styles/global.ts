@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle<Theme>`
 
 @media (max-width: 1800px) {
   html {
-    font-size: 93.75%;
+    font-size: 100%;
   }
 }
 
@@ -35,6 +35,8 @@ button {
 
 button {
   cursor: pointer;
+  background-color: transparent;
+
 }
 
 a {
