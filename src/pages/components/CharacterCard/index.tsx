@@ -43,6 +43,10 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
     <S.Container>
       <S.ImageContainer>
         <Image src={avatarSrc} alt={name} width={150} height={150} />
+
+        <div className="image-effect">
+          <AiOutlinePlus /> Info
+        </div>
       </S.ImageContainer>
 
       <S.Content>
@@ -54,9 +58,6 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
           {villages[village as Village]} {village}
         </p>
       </S.Content>
-      <S.Button>
-        <AiOutlinePlus /> Info
-      </S.Button>
     </S.Container>
   );
 };
