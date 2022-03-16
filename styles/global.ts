@@ -20,6 +20,8 @@ export const GlobalStyle = createGlobalStyle<Theme>`
   }
 }
 
+
+
 body {
   background: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.gray.dark};
@@ -42,6 +44,7 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 `;

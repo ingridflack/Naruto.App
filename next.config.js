@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ["narutoql.s3.amazonaws.com"],
   },
+  experimental: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;
