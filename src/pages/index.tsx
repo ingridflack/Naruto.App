@@ -1,55 +1,47 @@
-import { gql } from "@apollo/client";
-import client from "../../apollo-client";
-
 import Head from "next/head";
 import CharacterCard from "../components/CharacterCard";
 import Header from "../components/Header";
 
-import { Container, CharactersWrapper } from "./styles";
-import VillagesFilter from "../components/Filters/VillagesFilter";
-import ClansFilter from "../components/Filters/ClansFilter";
+import { Container, FiltersContainer, CharactersWrapper } from "./styles";
+
+import Filter from "../components/Filter";
+import { getAllCharacters, getAllClans, getAllVillages } from "../services";
 
 // --------> Mudar de lugar as interfaces
-interface Village {
+export interface Village {
   name: string;
   _id: string;
 }
 
-export interface Villages {
-  villages: Village[];
-}
-
-interface Clan {
+export interface Clan {
   name: string;
-}
-export interface Clans {
-  clans: Clan[];
 }
 interface HomeProps {
   villages: Village[];
   clans: Clan[];
+  characters: any;
 }
 
-export const Home = ({ villages, clans }: HomeProps) => {
+export const Home = ({ villages, clans, characters }: HomeProps) => {
   console.log(villages, clans);
 
-  const characters = [
-    {
-      name: "Aburame Shibi",
-      village: "leaf village",
-      avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
-    },
-    {
-      name: "Aburame Shibi 2",
-      village: "leaf village",
-      avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
-    },
-    {
-      name: "Aburame Shibi 3",
-      village: "leaf village",
-      avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
-    },
-  ];
+  // const characters = [
+  //   {
+  //     name: "Aburame Shibi",
+  //     village: "leaf village",
+  //     avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
+  //   },
+  //   {
+  //     name: "Aburame Shibi 2",
+  //     village: "leaf village",
+  //     avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
+  //   },
+  //   {
+  //     name: "Aburame Shibi 3",
+  //     village: "leaf village",
+  //     avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
+  //   },
+  // ];
 
   return (
     <>
@@ -59,10 +51,12 @@ export const Home = ({ villages, clans }: HomeProps) => {
       <Container>
         <Header />
         <main>
-          <VillagesFilter villages={villages} />
-          <ClansFilter clans={clans} />
+          <FiltersContainer>
+            <Filter data={villages} labelText="village" />
+            <Filter data={clans} labelText="clan" />
+          </FiltersContainer>
           <CharactersWrapper>
-            {characters.map((character) => (
+            {characters.map((character: any) => (
               <CharacterCard key={character.name} character={character} />
             ))}
           </CharactersWrapper>
@@ -75,42 +69,21 @@ export const Home = ({ villages, clans }: HomeProps) => {
 export async function getStaticProps() {
   const {
     data: { villages },
-  } = await client.query({
-    query: gql`
-      query Villages {
-        villages {
-          results {
-            _id
-            name
-          }
-        }
-      }
-    `,
-  });
+  } = await getAllVillages();
 
   const {
     data: { clans },
-  } = await client.query({
-    query: gql`
-      query Clans {
-        clans {
-          results {
-            name
-            description
-            avatarSrc
-            village
-          }
-        }
-      }
-    `,
-  });
+  } = await getAllClans();
 
-  console.log({ villages, clans });
+  const {
+    data: { characters },
+  } = await getAllCharacters();
 
   return {
     props: {
       villages: villages.results,
       clans: clans.results,
+      characters: characters.results,
     },
   };
 }

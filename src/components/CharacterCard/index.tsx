@@ -1,8 +1,13 @@
-import Image from "next/image";
+import Image from "../Image";
 import * as S from "./styles";
 
 import { GiVillage } from "react-icons/gi";
-import { AiOutlineUser, AiOutlinePlus } from "react-icons/ai";
+import {
+  AiOutlineUser,
+  AiOutlinePlus,
+  AiOutlineHeart,
+  AiFillHeart,
+} from "react-icons/ai";
 
 const villages = {
   "cloud village": <GiVillage />,
@@ -41,6 +46,7 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
 
   return (
     <S.Container>
+      <AiOutlineHeart />
       <S.ImageContainer>
         <Image src={avatarSrc} alt={name} width={150} height={150} />
 

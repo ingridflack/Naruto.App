@@ -7,7 +7,7 @@ export const Container = styled.div`
     align-items: flex-end;
     border-radius: 0.5rem;
 
-    width: 200px;
+    height: 253px;
     padding: 1rem;
     border: 1px solid transparent;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -65,6 +65,7 @@ export const Content = styled.div`
     margin-top: 0.5rem;
 
     .character-name {
+      text-align: center;
       svg {
         margin-right: 0.25rem;
       }
