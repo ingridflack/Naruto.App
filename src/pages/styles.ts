@@ -1,16 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  > main {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    flex: 1;
-  }
+  margin: 0 auto;
+  max-width: 1020px;
+  padding: 2rem;
+  width: 100%;
 `;
 
 export const FiltersContainer = styled.div`

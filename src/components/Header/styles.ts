@@ -1,17 +1,21 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.header`
+  background-color: ${({ theme }) => theme.colors.gray.dark};
+`;
+
+export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 1rem;
-  background-color: ${({ theme }) => theme.colors.gray.dark};
+  .image-wrapper {
+    cursor: pointer;
+  }
 
   .input-wrapper {
     position: relative;
     width: 400px;
-
     svg {
       position: absolute;
       top: 50%;

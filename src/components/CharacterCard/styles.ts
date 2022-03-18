@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.a`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;

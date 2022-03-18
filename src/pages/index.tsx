@@ -1,6 +1,5 @@
 import Head from "next/head";
 import CharacterCard from "../components/CharacterCard";
-import Header from "../components/Header";
 
 import { Container, FiltersContainer, CharactersWrapper } from "./styles";
 
@@ -16,10 +15,25 @@ export interface Village {
 export interface Clan {
   name: string;
 }
+
+export interface Character {
+  _id: string;
+  name: string;
+  avatarSrc: string;
+  description: string;
+  firstAnimeAppearance: string;
+  firstMangaAppearance: string;
+  nameMeaning: string;
+  notableFeatures: string;
+  rank: string;
+  village: string;
+  age: string;
+}
+
 interface HomeProps {
   villages: Village[];
   clans: Clan[];
-  characters: any;
+  characters: Character[];
 }
 
 export const Home = ({ villages, clans, characters }: HomeProps) => {
@@ -29,7 +43,6 @@ export const Home = ({ villages, clans, characters }: HomeProps) => {
         <title>Home | Naruto.app</title>
       </Head>
       <Container>
-        <Header />
         <main>
           <FiltersContainer>
             <Filter data={villages} labelText="village" />

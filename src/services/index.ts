@@ -58,7 +58,29 @@ export const getAllCharacters = () => {
   });
 };
 
-export const filterCharacter = (character: string) => {
+export const getCharacter = (id: string) => {
+  return client.query({
+    query: gql`
+      query Character {
+        character(id: "${id}") {
+          _id
+          name
+          avatarSrc
+          description
+          village
+          age
+          firstAnimeAppearance
+          firstMangaAppearance
+          nameMeaning
+          notableFeatures
+          rank
+        }
+      }
+    `,
+  });
+};
+
+export const filterCharacterByName = (character: string) => {
   return client.query({
     query: gql`
       query Character {

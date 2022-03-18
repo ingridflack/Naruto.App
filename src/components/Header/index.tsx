@@ -1,29 +1,49 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 import { AiOutlineSearch } from "react-icons/ai";
+import { Container } from "../../pages/styles";
 import * as S from "./styles";
 
 const Header = () => {
+  const [search, setSearch] = useState("");
+
+  const handleInputChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  console.log(search);
+
   return (
     <S.Container>
-      <div className="image-wrapper">
-        <Image
-          src="/naruto_logo.svg"
-          width={125}
-          height={53}
-          alt="Naruto logo"
-        />
-      </div>
+      <Container>
+        <S.HeaderWrapper>
+          <Link href={"/"} passHref>
+            <a className="image-wrapper">
+              <Image
+                src="/naruto_logo.svg"
+                width={125}
+                height={53}
+                alt="Naruto logo"
+              />
+            </a>
+          </Link>
 
-      <div className="input-wrapper">
-        <S.Input />
-        <AiOutlineSearch />
-      </div>
+          <div className="input-wrapper">
+            <S.Input onChange={handleInputChange} value={search} />
+            <AiOutlineSearch />
+          </div>
 
-      <S.Menu>
-        <a>Home</a>
-        <a>Favorites</a>
-      </S.Menu>
+          <S.Menu>
+            <Link href={"/"} passHref>
+              <a>Home</a>
+            </Link>
+
+            <a>Favorites</a>
+          </S.Menu>
+        </S.HeaderWrapper>
+      </Container>
     </S.Container>
   );
 };

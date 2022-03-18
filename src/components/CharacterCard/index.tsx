@@ -8,6 +8,8 @@ import {
   AiOutlineHeart,
   AiFillHeart,
 } from "react-icons/ai";
+import { Character } from "../../pages";
+import Link from "next/link";
 
 const villages = {
   "cloud village": <GiVillage />,
@@ -34,37 +36,35 @@ type Villages = typeof villages;
 type Village = keyof Villages;
 
 interface CharacterCardProps {
-  character: {
-    name: string;
-    village: string;
-    avatarSrc: string;
-  };
+  character: Character;
 }
 
 const CharacterCard = ({ character }: CharacterCardProps) => {
-  const { name, village, avatarSrc } = character;
+  const { _id, name, village, avatarSrc } = character;
 
   return (
-    <S.Container>
-      <AiOutlineHeart />
-      <S.ImageContainer>
-        <Image src={avatarSrc} alt={name} width={150} height={150} />
+    <Link href={`/character/${_id}`} passHref>
+      <S.Container>
+        <AiOutlineHeart />
+        <S.ImageContainer>
+          <Image src={avatarSrc} alt={name} width={150} height={150} />
 
-        <div className="image-effect">
-          <AiOutlinePlus /> Info
-        </div>
-      </S.ImageContainer>
+          <div className="image-effect">
+            <AiOutlinePlus /> Info
+          </div>
+        </S.ImageContainer>
 
-      <S.Content>
-        <p className="character-name">
-          <AiOutlineUser />
-          {name}
-        </p>
-        <p className="village">
-          {villages[village as Village]} {village}
-        </p>
-      </S.Content>
-    </S.Container>
+        <S.Content>
+          <p className="character-name">
+            <AiOutlineUser />
+            {name}
+          </p>
+          <p className="village">
+            {villages[village as Village]} {village}
+          </p>
+        </S.Content>
+      </S.Container>
+    </Link>
   );
 };
 
