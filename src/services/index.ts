@@ -57,3 +57,22 @@ export const getAllCharacters = () => {
     `,
   });
 };
+
+export const filterCharacter = (character: string) => {
+  return client.query({
+    query: gql`
+      query Character {
+        characters(filter: { name: ${character} }) {
+          results {
+            _id
+            name
+            avatarSrc
+            description
+            rank
+            village
+          }
+        }
+      }
+    `,
+  });
+};

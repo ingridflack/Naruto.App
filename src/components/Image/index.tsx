@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import NImage from "next/image";
 
-const Image = ({ src, alt, ...props }: any) => {
+interface ImageProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const Image = ({ src, alt, ...props }: ImageProps) => {
   const [source, setSource] = useState(src);
 
   return (

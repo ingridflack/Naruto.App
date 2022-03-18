@@ -23,26 +23,6 @@ interface HomeProps {
 }
 
 export const Home = ({ villages, clans, characters }: HomeProps) => {
-  console.log(villages, clans);
-
-  // const characters = [
-  //   {
-  //     name: "Aburame Shibi",
-  //     village: "leaf village",
-  //     avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
-  //   },
-  //   {
-  //     name: "Aburame Shibi 2",
-  //     village: "leaf village",
-  //     avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
-  //   },
-  //   {
-  //     name: "Aburame Shibi 3",
-  //     village: "leaf village",
-  //     avatarSrc: "https://narutoql.s3.amazonaws.com/Aburame2.jpg",
-  //   },
-  // ];
-
   return (
     <>
       <Head>

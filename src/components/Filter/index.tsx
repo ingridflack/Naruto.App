@@ -8,8 +8,6 @@ interface FilterProps {
 }
 
 const Filter = ({ data, labelText }: FilterProps) => {
-  console.log({ data });
-
   return (
     <Container>
       <Label htmlFor={labelText}>Filter by {labelText}</Label>
