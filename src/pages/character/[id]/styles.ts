@@ -42,6 +42,7 @@ export const Info = styled.div`
     font-size: ${({ theme }) => theme.fontSize.medium};
     ${({ theme }) => theme.colors.gray.silver};
     margin: 0.5rem 0;
+    text-transform: capitalize;
   }
 `;
 

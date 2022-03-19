@@ -10,6 +10,8 @@ import {
 } from "react-icons/ai";
 import { Character } from "../../pages";
 import Link from "next/link";
+import { useFavorite } from "../../hooks/useFavorite";
+import { MouseEvent } from "react";
 
 const villages = {
   "cloud village": <GiVillage />,
@@ -40,12 +42,25 @@ interface CharacterCardProps {
 }
 
 const CharacterCard = ({ character }: CharacterCardProps) => {
+  const { addFavorite, checkFavorite } = useFavorite();
   const { _id, name, village, avatarSrc } = character;
+
+  const isFavorite = checkFavorite(character);
+
+  const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    addFavorite(character);
+  };
 
   return (
     <Link href={`/character/${_id}`} passHref>
       <S.Container>
-        <AiOutlineHeart />
+        <button type="button" onClick={handleFavorite}>
+          {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+        </button>
+
         <S.ImageContainer>
           <Image src={avatarSrc} alt={name} width={150} height={150} />
 

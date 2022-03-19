@@ -3,14 +3,17 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../../styles/global";
 import theme from "../../styles/theme";
 import Header from "../components/Header";
+import { FavoriteProvider } from "../hooks/useFavorite";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Header />
+      <FavoriteProvider>
+        <GlobalStyle />
+        <Header />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </FavoriteProvider>
     </ThemeProvider>
   );
 }
