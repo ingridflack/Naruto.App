@@ -13,8 +13,8 @@ interface FavoriteProviderProps {
 
 interface FavoriteContextData {
   favorites: Character[];
-  addFavorite: (character: Character) => void;
   checkFavorite: (character: Character) => boolean;
+  toggleFavorite: (Character: Character) => void;
 }
 
 const FavoriteContext = createContext<FavoriteContextData>(
@@ -44,13 +44,31 @@ export function FavoriteProvider({
     favorites.some((c) => c._id === character._id);
 
   const addFavorite = (character: Character) => {
-    if (checkFavorite(character)) return;
-
     setFavorites((favorites: Character[]) => [...favorites, character]);
   };
 
+  const removeFavorite = (character: Character) => {
+    setFavorites((favorites) =>
+      favorites.filter((c) => c._id !== character._id)
+    );
+  };
+
+  const toggleFavorite = (character: Character) => {
+    if (checkFavorite(character)) {
+      removeFavorite(character);
+    } else {
+      addFavorite(character);
+    }
+  };
+
   return (
-    <FavoriteContext.Provider value={{ favorites, checkFavorite, addFavorite }}>
+    <FavoriteContext.Provider
+      value={{
+        favorites,
+        checkFavorite,
+        toggleFavorite,
+      }}
+    >
       {children}
     </FavoriteContext.Provider>
   );

@@ -39,8 +39,9 @@ const Header = () => {
             <Link href={"/"} passHref>
               <a>Home</a>
             </Link>
-
-            <a>Favorites</a>
+            <Link href={"/favorites"}>
+              <a>Favorites</a>
+            </Link>
           </S.Menu>
         </S.HeaderWrapper>
       </Container>

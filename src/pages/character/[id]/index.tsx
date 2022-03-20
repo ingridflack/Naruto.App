@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { Fragment } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { Fragment, MouseEvent } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Character } from "../..";
 import { ImageContainer } from "../../../components/CharacterCard/styles";
 
 import Image from "../../../components/Image";
+import { useFavorite } from "../../../hooks/useFavorite";
 import { getCharacter } from "../../../services";
 import { Container } from "../../styles";
 
@@ -15,6 +16,10 @@ interface CharacterDetailsProps {
 }
 
 export const CharacterDetails = ({ character }: CharacterDetailsProps) => {
+  const { toggleFavorite, checkFavorite } = useFavorite();
+
+  const isFavorite = checkFavorite(character);
+
   const { _id, name, avatarSrc, rank, village, age } = character;
 
   const sections = [
@@ -25,6 +30,11 @@ export const CharacterDetails = ({ character }: CharacterDetailsProps) => {
     { title: "Notable features", key: "notableFeatures" },
   ];
 
+  const handleFavorite = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    toggleFavorite(character);
+  };
   return (
     <>
       <Head>
@@ -46,9 +56,16 @@ export const CharacterDetails = ({ character }: CharacterDetailsProps) => {
                 <p>{rank ? rank : "Unknown rank"}</p>
               </div>
 
-              <Button>
-                <AiOutlineHeart />
-                Add favorite
+              <Button onClick={handleFavorite}>
+                {isFavorite ? (
+                  <>
+                    <AiFillHeart /> Remove favorite
+                  </>
+                ) : (
+                  <>
+                    <AiOutlineHeart /> Add favorite
+                  </>
+                )}
               </Button>
             </Info>
           </HeaderWrapper>

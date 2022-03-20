@@ -42,7 +42,7 @@ interface CharacterCardProps {
 }
 
 const CharacterCard = ({ character }: CharacterCardProps) => {
-  const { addFavorite, checkFavorite } = useFavorite();
+  const { toggleFavorite, checkFavorite } = useFavorite();
   const { _id, name, village, avatarSrc } = character;
 
   const isFavorite = checkFavorite(character);
@@ -51,15 +51,15 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
     e.preventDefault();
     e.stopPropagation();
 
-    addFavorite(character);
+    toggleFavorite(character);
   };
 
   return (
     <Link href={`/character/${_id}`} passHref>
       <S.Container>
-        <button type="button" onClick={handleFavorite}>
+        <S.Button type="button" onClick={handleFavorite}>
           {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
-        </button>
+        </S.Button>
 
         <S.ImageContainer>
           <Image src={avatarSrc} alt={name} width={150} height={150} />

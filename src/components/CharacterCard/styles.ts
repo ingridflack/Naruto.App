@@ -87,3 +87,15 @@ export const Content = styled.div`
     }
   `}
 `;
+
+export const Button = styled.button`
+  border: none;
+
+  svg {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+`;
