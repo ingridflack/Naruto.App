@@ -4,11 +4,12 @@ export const Container = styled.a`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     border-radius: 0.5rem;
+    position: relative;
+    height: 100%;
 
-    height: 253px;
-    padding: 1rem;
+    padding: 2rem 1rem 1rem;
     border: 1px solid transparent;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -31,6 +32,7 @@ export const ImageContainer = styled.div`
     display: flex;
     overflow: hidden;
     position: relative;
+    flex-shrink: 0;
 
     .image-effect {
       background-color: rgba(255, 139, 56, 0.8);
@@ -90,12 +92,16 @@ export const Content = styled.div`
 
 export const Button = styled.button`
   border: none;
+  padding: 0.5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
 
   svg {
     transition: transform 0.3s ease;
+  }
 
-    &:hover {
-      transform: scale(1.3);
-    }
+  &:hover svg {
+    transform: scale(1.3);
   }
 `;

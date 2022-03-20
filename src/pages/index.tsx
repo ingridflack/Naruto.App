@@ -6,6 +6,7 @@ import { Container, FiltersContainer, CharactersWrapper } from "./styles";
 import Filter from "../components/Filter";
 import { getAllCharacters, getAllClans, getAllVillages } from "../services";
 import { useFavorite } from "../hooks/useFavorite";
+import { Characters } from "../contexts/characters";
 
 // --------> Mudar de lugar as interfaces
 export interface Village {
@@ -38,9 +39,6 @@ interface HomeProps {
 }
 
 export const Home = ({ villages, clans, characters }: HomeProps) => {
-  const { favorites } = useFavorite();
-
-  console.log(favorites);
   return (
     <>
       <Head>
