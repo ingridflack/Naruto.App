@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import { Character } from "../pages";
 
 interface CharactersProviderProps {
@@ -7,6 +14,7 @@ interface CharactersProviderProps {
 
 interface CharactersContextData {
   characters: Character[];
+  setCharacters: Dispatch<Character[]>;
 }
 
 const CharactersContext = createContext<CharactersContextData>(
@@ -16,10 +24,10 @@ const CharactersContext = createContext<CharactersContextData>(
 export function CharactersProvider({
   children,
 }: CharactersProviderProps): JSX.Element {
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
 
   return (
-    <CharactersContext.Provider value={{ characters }}>
+    <CharactersContext.Provider value={{ characters, setCharacters }}>
       {children}
     </CharactersContext.Provider>
   );

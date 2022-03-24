@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { AiOutlineSearch } from "react-icons/ai";
 import { Container } from "../../pages/styles";
@@ -9,7 +9,7 @@ import * as S from "./styles";
 const Header = () => {
   const [search, setSearch] = useState("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 

@@ -59,6 +59,9 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
       <S.Container>
         <S.Button type="button" onClick={handleFavorite}>
           {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+          <S.Popover>
+            {isFavorite ? "Remove favorite" : "Add favorite"}
+          </S.Popover>
         </S.Button>
 
         <S.ImageContainer>

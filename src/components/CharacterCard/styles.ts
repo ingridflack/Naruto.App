@@ -90,6 +90,37 @@ export const Content = styled.div`
   `}
 `;
 
+export const Popover = styled.div`
+  ${({ theme }) => css`
+    font-size: ${theme.fontSize.small};
+    background-color: ${theme.colors.primary};
+    color: ${theme.colors.background};
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    font-size: 11px;
+    pointer-events: none;
+
+    /* display: none; */
+    opacity: 0;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    transition: opacity 300ms ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: ${theme.colors.primary};
+    }
+  `}
+`;
+
 export const Button = styled.button`
   border: none;
   padding: 0.5rem;
@@ -103,5 +134,11 @@ export const Button = styled.button`
 
   &:hover svg {
     transform: scale(1.3);
+  }
+
+  &:hover {
+    ${Popover} {
+      opacity: 1;
+    }
   }
 `;

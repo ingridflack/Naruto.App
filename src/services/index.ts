@@ -84,7 +84,7 @@ export const filterCharacterByName = (character: string) => {
   return client.query({
     query: gql`
       query Character {
-        characters(filter: { name: ${character} }) {
+        characters(filter: { name: "${character}" }) {
           results {
             _id
             name
