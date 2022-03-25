@@ -7,6 +7,7 @@ import Filter from "../components/Filter";
 import { getAllCharacters, getAllClans, getAllVillages } from "../services";
 import { useFavorite } from "../hooks/useFavorite";
 import { Characters } from "../contexts/characters";
+import { useEffect } from "react";
 
 // --------> Mudar de lugar as interfaces
 export interface Village {
@@ -35,10 +36,16 @@ export interface Character {
 interface HomeProps {
   villages: Village[];
   clans: Clan[];
-  characters: Character[];
+  initialCharacters: Character[];
 }
 
-export const Home = ({ villages, clans, characters }: HomeProps) => {
+export const Home = ({ initialCharacters, villages, clans }: HomeProps) => {
+  const { characters, setCharacters } = Characters();
+
+  useEffect(() => {
+    setCharacters(initialCharacters);
+  }, [initialCharacters, setCharacters]);
+
   return (
     <>
       <Head>
@@ -51,7 +58,7 @@ export const Home = ({ villages, clans, characters }: HomeProps) => {
             <Filter data={clans} labelText="clan" />
           </FiltersContainer>
           <CharactersWrapper>
-            {characters.map((character: any) => (
+            {characters?.map((character: any) => (
               <CharacterCard key={character.name} character={character} />
             ))}
           </CharactersWrapper>
@@ -78,7 +85,7 @@ export async function getStaticProps() {
     props: {
       villages: villages.results,
       clans: clans.results,
-      characters: characters.results,
+      initialCharacters: characters.results,
     },
   };
 }

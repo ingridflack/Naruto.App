@@ -3,17 +3,24 @@ import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 import { AiOutlineSearch } from "react-icons/ai";
+import { Characters, Filters } from "../../contexts/characters";
 import { Container } from "../../pages/styles";
+import { filterCharacters } from "../../services";
 import * as S from "./styles";
 
 const Header = () => {
   const [search, setSearch] = useState("");
+  const { setFilters } = Characters();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+  const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const search = e.target.value;
+
+    setSearch(search);
+    setFilters((prev: Filters = { name: "", village: "" }) => ({
+      ...prev,
+      name: search,
+    }));
   };
-
-  console.log(search);
 
   return (
     <S.Container>

@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import client from "../../apollo-client";
+import { Filters } from "../contexts/characters";
 
 export const getAllVillages = () => {
   return client.query({
@@ -80,11 +81,13 @@ export const getCharacter = (id: string) => {
   });
 };
 
-export const filterCharacterByName = (character: string) => {
+export const filterCharacters = (filters: Filters) => {
+  console.log(filters);
+
   return client.query({
     query: gql`
       query Character {
-        characters(filter: { name: "${character}" }) {
+        characters(filter: { name: "${filters.name}", village: "${filters.village}" }) {
           results {
             _id
             name
