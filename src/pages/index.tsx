@@ -4,19 +4,14 @@ import CharacterCard from "../components/CharacterCard";
 import { Container, FiltersContainer, CharactersWrapper } from "./styles";
 
 import Filter from "../components/Filter";
-import { getAllCharacters, getAllClans, getAllVillages } from "../services";
-import { useFavorite } from "../hooks/useFavorite";
-import { Characters } from "../contexts/characters";
+import { getAllCharacters, getAllVillages } from "../services";
 import { useEffect } from "react";
+import { useFilter } from "../contexts/filter";
 
 // --------> Mudar de lugar as interfaces
 export interface Village {
   name: string;
   _id: string;
-}
-
-export interface Clan {
-  name: string;
 }
 
 export interface Character {
@@ -35,12 +30,16 @@ export interface Character {
 
 interface HomeProps {
   villages: Village[];
-  clans: Clan[];
   initialCharacters: Character[];
 }
 
-export const Home = ({ initialCharacters, villages, clans }: HomeProps) => {
-  const { characters, setCharacters } = Characters();
+const ranks = ["genin", "chuunin", "jounin", "kage", "sannin"].map((rank) => ({
+  name: rank,
+  _id: rank,
+}));
+
+export const Home = ({ initialCharacters, villages }: HomeProps) => {
+  const { characters, setCharacters } = useFilter();
 
   useEffect(() => {
     setCharacters(initialCharacters);
@@ -55,7 +54,7 @@ export const Home = ({ initialCharacters, villages, clans }: HomeProps) => {
         <main>
           <FiltersContainer>
             <Filter data={villages} labelText="village" />
-            <Filter data={clans} labelText="clan" />
+            <Filter data={ranks} labelText="rank" />
           </FiltersContainer>
           <CharactersWrapper>
             {characters?.map((character: any) => (
@@ -74,17 +73,12 @@ export async function getStaticProps() {
   } = await getAllVillages();
 
   const {
-    data: { clans },
-  } = await getAllClans();
-
-  const {
     data: { characters },
   } = await getAllCharacters();
 
   return {
     props: {
       villages: villages.results,
-      clans: clans.results,
       initialCharacters: characters.results,
     },
   };

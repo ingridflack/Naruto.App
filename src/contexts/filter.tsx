@@ -1,4 +1,5 @@
 import {
+  ChangeEvent,
   createContext,
   Dispatch,
   ReactNode,
@@ -8,13 +9,13 @@ import {
   useState,
 } from "react";
 import { Character } from "../pages";
-import { filterCharacters, getAllCharacters } from "../services";
+import { filterCharacters } from "../services";
 
-interface CharactersProviderProps {
+interface FilterProviderProps {
   children: ReactNode;
 }
 
-interface CharactersContextData {
+interface FilterContextData {
   characters: Character[];
   setCharacters: Dispatch<SetStateAction<Character[]>>;
   filters?: Filters;
@@ -22,18 +23,14 @@ interface CharactersContextData {
 }
 
 export interface Filters {
-  // clan: string;
+  rank: string;
   name: string;
   village: string;
 }
 
-const CharactersContext = createContext<CharactersContextData>(
-  {} as CharactersContextData
-);
+const FilterContext = createContext<FilterContextData>({} as FilterContextData);
 
-export function CharactersProvider({
-  children,
-}: CharactersProviderProps): JSX.Element {
+export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [filters, setFilters] = useState<Filters | undefined>();
 
@@ -53,16 +50,16 @@ export function CharactersProvider({
   }, [filters]);
 
   return (
-    <CharactersContext.Provider
+    <FilterContext.Provider
       value={{ characters, setCharacters, filters, setFilters }}
     >
       {children}
-    </CharactersContext.Provider>
+    </FilterContext.Provider>
   );
 }
 
-export function Characters() {
-  const context = useContext(CharactersContext);
+export function useFilter() {
+  const context = useContext(FilterContext);
 
   return context;
 }
