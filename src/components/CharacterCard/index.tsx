@@ -13,30 +13,6 @@ import Link from "next/link";
 import { useFavorite } from "../../hooks/useFavorite";
 import { MouseEvent } from "react";
 
-const villages = {
-  "cloud village": <GiVillage />,
-  "craftsman village": <GiVillage />,
-  "grass village": <GiVillage />,
-  "heat haze village": <GiVillage />,
-  "hot springs village": <GiVillage />,
-  "leaf village": <GiVillage />,
-  "lock village": <GiVillage />,
-  "mist village": <GiVillage />,
-  "pink flower village": <GiVillage />,
-  "rain village": <GiVillage />,
-  "rock village": <GiVillage />,
-  "sand village": <GiVillage />,
-  "sound village": <GiVillage />,
-  "star village": <GiVillage />,
-  "stone village": <GiVillage />,
-  "waterfall village": <GiVillage />,
-  "whirling tides village": <GiVillage />,
-};
-
-type Villages = typeof villages;
-
-type Village = keyof Villages;
-
 interface CharacterCardProps {
   character: Character;
 }
@@ -78,7 +54,7 @@ const CharacterCard = ({ character }: CharacterCardProps) => {
             {name}
           </p>
           <p className="village">
-            {villages[village as Village]} {village}
+            <GiVillage /> {village}
           </p>
         </S.Content>
       </S.Container>

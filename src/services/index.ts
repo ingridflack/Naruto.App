@@ -65,12 +65,16 @@ export const getCharacter = (id: string) => {
 };
 
 export const filterCharacters = (filters: Filters) => {
-  console.log(filters);
-
   return client.query({
     query: gql`
       query Character {
         characters(filter: { name: "${filters.name}", village: "${filters.village}", rank: "${filters.rank}" }) {
+          info {
+            count
+            pages
+            next
+            prev
+          }
           results {
             _id
             name

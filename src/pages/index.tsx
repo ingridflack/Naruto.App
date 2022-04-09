@@ -1,14 +1,15 @@
 import Head from "next/head";
+
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import CharacterCard from "../components/CharacterCard";
-
 import { Container, FiltersContainer, CharactersWrapper } from "./styles";
-
 import Filter from "../components/Filter";
 import { getAllCharacters, getAllVillages } from "../services";
 import { useEffect } from "react";
 import { useFilter } from "../contexts/filter";
+import Alert from "../components/Alert";
 
-// --------> Mudar de lugar as interfaces
 export interface Village {
   name: string;
   _id: string;
@@ -39,11 +40,21 @@ const ranks = ["genin", "chuunin", "jounin", "kage", "sannin"].map((rank) => ({
 }));
 
 export const Home = ({ initialCharacters, villages }: HomeProps) => {
-  const { characters, setCharacters } = useFilter();
+  const { characters, setCharacters, isLoading } = useFilter();
 
   useEffect(() => {
     setCharacters(initialCharacters);
   }, [initialCharacters, setCharacters]);
+
+  const renderContent = () => {
+    if (isLoading) return <p>Loading...</p>;
+
+    if (!characters.length) return <Alert>No results</Alert>;
+
+    return characters?.map((character: any) => (
+      <CharacterCard key={character.name} character={character} />
+    ));
+  };
 
   return (
     <>
@@ -56,11 +67,7 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
             <Filter data={villages} labelText="village" />
             <Filter data={ranks} labelText="rank" />
           </FiltersContainer>
-          <CharactersWrapper>
-            {characters?.map((character: any) => (
-              <CharacterCard key={character.name} character={character} />
-            ))}
-          </CharactersWrapper>
+          <CharactersWrapper>{renderContent()}</CharactersWrapper>
         </main>
       </Container>
     </>

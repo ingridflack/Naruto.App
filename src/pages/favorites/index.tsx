@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Alert from "../../components/Alert";
 import CharacterCard from "../../components/CharacterCard";
 import { useFavorite } from "../../hooks/useFavorite";
 import { CharactersWrapper, Container } from "../styles";
@@ -19,6 +20,8 @@ const Favorites = () => {
           {favorites.map((character: any) => (
             <CharacterCard key={character.name} character={character} />
           ))}
+
+          {!favorites.length && <Alert>No favorites added</Alert>}
         </CharactersWrapper>
       </Container>
     </>

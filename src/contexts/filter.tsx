@@ -1,5 +1,4 @@
 import {
-  ChangeEvent,
   createContext,
   Dispatch,
   ReactNode,
@@ -20,6 +19,7 @@ interface FilterContextData {
   setCharacters: Dispatch<SetStateAction<Character[]>>;
   filters?: Filters;
   setFilters: Dispatch<SetStateAction<Filters | undefined>>;
+  isLoading: boolean;
 }
 
 export interface Filters {
@@ -33,25 +33,34 @@ const FilterContext = createContext<FilterContextData>({} as FilterContextData);
 export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [filters, setFilters] = useState<Filters | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async function () {
       if (!filters) return;
 
       try {
+        setIsLoading(true);
+
         const data = await filterCharacters(filters);
         setCharacters(data.data.characters.results);
-
-        console.log(data);
       } catch (e) {
-        console.log({ e });
+        console.error({ e });
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, [filters]);
 
   return (
     <FilterContext.Provider
-      value={{ characters, setCharacters, filters, setFilters }}
+      value={{
+        characters,
+        setCharacters,
+        filters,
+        setFilters,
+        isLoading,
+      }}
     >
       {children}
     </FilterContext.Provider>
