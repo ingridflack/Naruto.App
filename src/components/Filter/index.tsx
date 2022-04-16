@@ -21,10 +21,12 @@ const Filter = ({ data, labelText }: FilterProps) => {
     const filterValue = e.target.value;
 
     setFilterValue(filterValue);
-    setFilters((prev: Filters = { name: "", village: "", rank: "" }) => ({
-      ...prev,
-      [labelText]: filterValue,
-    }));
+    setFilters(
+      (prev: Filters = { name: "", village: "", rank: "", page: 1 }) => ({
+        ...prev,
+        [labelText]: filterValue,
+      })
+    );
   };
 
   return (

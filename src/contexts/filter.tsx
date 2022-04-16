@@ -26,6 +26,7 @@ export interface Filters {
   rank: string;
   name: string;
   village: string;
+  page: number;
 }
 
 const FilterContext = createContext<FilterContextData>({} as FilterContextData);
@@ -34,6 +35,7 @@ export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [filters, setFilters] = useState<Filters | undefined>();
   const [isLoading, setIsLoading] = useState(false);
+  const [total, setTotal] = useState(null);
 
   useEffect(() => {
     (async function () {
@@ -44,6 +46,7 @@ export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
 
         const data = await filterCharacters(filters);
         setCharacters(data.data.characters.results);
+        setTotal(data.data.characters.info.pages);
       } catch (e) {
         console.error({ e });
       } finally {

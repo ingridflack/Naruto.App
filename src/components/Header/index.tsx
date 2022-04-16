@@ -15,10 +15,12 @@ const Header = () => {
     const search = e.target.value;
 
     setSearch(search);
-    setFilters((prev: Filters = { name: "", village: "", rank: "" }) => ({
-      ...prev,
-      name: search,
-    }));
+    setFilters(
+      (prev: Filters = { name: "", village: "", rank: "", page: 1 }) => ({
+        ...prev,
+        name: search,
+      })
+    );
   };
 
   return (

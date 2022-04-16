@@ -1,14 +1,21 @@
-import Head from "next/head";
-
-import InfiniteScroll from "react-infinite-scroll-component";
-
-import CharacterCard from "../components/CharacterCard";
-import { Container, FiltersContainer, CharactersWrapper } from "./styles";
-import Filter from "../components/Filter";
-import { getAllCharacters, getAllVillages } from "../services";
 import { useEffect } from "react";
-import { useFilter } from "../contexts/filter";
+
+import Head from "next/head";
+import ReactPaginate from "react-paginate";
+
+import { getAllCharacters, getAllVillages } from "../services";
+import { Filters, useFilter } from "../contexts/filter";
+
 import Alert from "../components/Alert";
+import Filter from "../components/Filter";
+import CharacterCard from "../components/CharacterCard";
+
+import {
+  Container,
+  FiltersContainer,
+  CharactersWrapper,
+  PaginationContainer,
+} from "./styles";
 
 export interface Village {
   name: string;
@@ -34,13 +41,13 @@ interface HomeProps {
   initialCharacters: Character[];
 }
 
-const ranks = ["genin", "chuunin", "jounin", "kage", "sannin"].map((rank) => ({
+const ranks = ["genin", "chuunin", "jounin", "kage", "unknown"].map((rank) => ({
   name: rank,
   _id: rank,
 }));
 
 export const Home = ({ initialCharacters, villages }: HomeProps) => {
-  const { characters, setCharacters, isLoading } = useFilter();
+  const { characters, setCharacters, isLoading, setFilters } = useFilter();
 
   useEffect(() => {
     setCharacters(initialCharacters);
@@ -56,6 +63,15 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
     ));
   };
 
+  const handleChangePageClick = ({ selected }: any) => {
+    setFilters(
+      (filters: Filters = { name: "", village: "", rank: "", page: 1 }) => ({
+        ...filters,
+        page: selected + 1,
+      })
+    );
+  };
+
   return (
     <>
       <Head>
@@ -67,8 +83,26 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
             <Filter data={villages} labelText="village" />
             <Filter data={ranks} labelText="rank" />
           </FiltersContainer>
-          <CharactersWrapper>{renderContent()}</CharactersWrapper>
+          <CharactersWrapper isFlex={isLoading}>
+            {renderContent()}
+          </CharactersWrapper>
         </main>
+
+        <PaginationContainer>
+          <ReactPaginate
+            previousLabel="Previous"
+            nextLabel="Next"
+            breakLabel="..."
+            breakClassName="break-me"
+            pageCount={10}
+            // total / 10
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={2}
+            onPageChange={handleChangePageClick}
+            containerClassName="pagination"
+            activeClassName="active"
+          />
+        </PaginationContainer>
       </Container>
     </>
   );

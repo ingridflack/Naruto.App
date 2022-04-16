@@ -64,11 +64,11 @@ export const getCharacter = (id: string) => {
   });
 };
 
-export const filterCharacters = (filters: Filters) => {
+export const filterCharacters = ({ name, village, rank, page }: Filters) => {
   return client.query({
     query: gql`
       query Character {
-        characters(filter: { name: "${filters.name}", village: "${filters.village}", rank: "${filters.rank}" }) {
+        characters(filter: { name: "${name}", village: "${village}", rank: "${rank}" }, page: ${page}) {
           info {
             count
             pages
