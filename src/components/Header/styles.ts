@@ -28,7 +28,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Input = styled.input`
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   padding: 0.5rem 0.5rem 0.5rem 2.5rem;
   border: 2px solid transparent;
   outline: none;

@@ -1,6 +1,8 @@
+import debounce from "lodash.debounce";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 
 import { AiOutlineSearch } from "react-icons/ai";
 import { Filters, useFilter } from "../../contexts/filter";
@@ -11,16 +13,28 @@ const Header = () => {
   const [search, setSearch] = useState("");
   const { setFilters } = useFilter();
 
+  const handleSetFilters = useCallback(
+    (search: string) => {
+      setFilters(
+        (prev: Filters = { name: "", village: "", rank: "", page: 1 }) => ({
+          ...prev,
+          name: search,
+        })
+      );
+    },
+    [setFilters]
+  );
+
+  const deboucedFilters = useMemo(
+    () => debounce(handleSetFilters, 500),
+    [handleSetFilters]
+  );
+
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value;
 
     setSearch(search);
-    setFilters(
-      (prev: Filters = { name: "", village: "", rank: "", page: 1 }) => ({
-        ...prev,
-        name: search,
-      })
-    );
+    deboucedFilters(search);
   };
 
   return (
