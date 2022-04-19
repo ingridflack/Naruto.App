@@ -7,6 +7,8 @@ import {
 } from "react";
 import { Character } from "../pages";
 
+import { toast } from "react-toastify";
+
 interface FavoriteProviderProps {
   children: ReactNode;
 }
@@ -45,12 +47,16 @@ export function FavoriteProvider({
 
   const addFavorite = (character: Character) => {
     setFavorites((favorites: Character[]) => [...favorites, character]);
+
+    toast.success("The character was added to favorites.");
   };
 
   const removeFavorite = (character: Character) => {
     setFavorites((favorites) =>
       favorites.filter((c) => c._id !== character._id)
     );
+
+    toast.success("The character was removed from favorites.");
   };
 
   const toggleFavorite = (character: Character) => {
