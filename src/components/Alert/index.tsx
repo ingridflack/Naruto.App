@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import { Container } from "./styles";
 import { FiAlertTriangle } from "react-icons/fi";
+
+import { Container } from "./styles";
 
 interface AlertProps {
   children: ReactNode;

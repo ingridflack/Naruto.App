@@ -1,14 +1,14 @@
 import "react-toastify/dist/ReactToastify.css";
 
 import type { AppProps } from "next/app";
+import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
+
 import { GlobalStyle } from "../../styles/global";
 import theme from "../../styles/theme";
 import Header from "../components/Header";
 import { FilterProvider } from "../contexts/filter";
 import { FavoriteProvider } from "../hooks/useFavorite";
-
-import { ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

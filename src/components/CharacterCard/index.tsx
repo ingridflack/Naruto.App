@@ -1,17 +1,18 @@
-import Image from "../Image";
-import * as S from "./styles";
-
-import { GiVillage } from "react-icons/gi";
+import { MouseEvent } from "react";
 import {
   AiOutlineUser,
   AiOutlinePlus,
   AiOutlineHeart,
   AiFillHeart,
 } from "react-icons/ai";
-import { Character } from "../../pages";
+import { GiVillage } from "react-icons/gi";
+
 import Link from "next/link";
+
 import { useFavorite } from "../../hooks/useFavorite";
-import { MouseEvent } from "react";
+import { Character } from "../../pages";
+import Image from "../Image";
+import * as S from "./styles";
 
 interface CharacterCardProps {
   character: Character;

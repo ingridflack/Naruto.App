@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import { Character } from "../pages";
 import { filterCharacters } from "../services";
 

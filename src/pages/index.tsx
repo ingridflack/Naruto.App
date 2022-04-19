@@ -1,15 +1,13 @@
 import { useEffect } from "react";
-
-import Head from "next/head";
 import ReactPaginate from "react-paginate";
 
-import { getAllCharacters, getAllVillages } from "../services";
-import { Filters, useFilter } from "../contexts/filter";
+import Head from "next/head";
 
 import Alert from "../components/Alert";
-import Filter from "../components/Filter";
 import CharacterCard from "../components/CharacterCard";
-
+import Filter from "../components/Filter";
+import { Filters, useFilter } from "../contexts/filter";
+import { getAllCharacters, getAllVillages } from "../services";
 import {
   Container,
   FiltersContainer,

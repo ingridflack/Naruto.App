@@ -1,9 +1,9 @@
 import Head from "next/head";
+
 import Alert from "../../components/Alert";
 import CharacterCard from "../../components/CharacterCard";
 import { useFavorite } from "../../hooks/useFavorite";
 import { CharactersWrapper, Container } from "../styles";
-
 import { Title } from "./styles";
 
 const Favorites = () => {

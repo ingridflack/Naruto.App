@@ -1,10 +1,11 @@
-import debounce from "lodash.debounce";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
 
-import { AiOutlineSearch } from "react-icons/ai";
+import debounce from "lodash.debounce";
+
 import { Filters, useFilter } from "../../contexts/filter";
 import { Container } from "../../pages/styles";
 import * as S from "./styles";

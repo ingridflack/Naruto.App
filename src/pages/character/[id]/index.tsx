@@ -1,14 +1,14 @@
-import Head from "next/head";
 import { Fragment, MouseEvent } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
+import Head from "next/head";
+
 import { Character } from "../..";
 import { ImageContainer } from "../../../components/CharacterCard/styles";
-
 import Image from "../../../components/Image";
 import { useFavorite } from "../../../hooks/useFavorite";
 import { getCharacter } from "../../../services";
 import { Container } from "../../styles";
-
 import { Header, Info, Button, HeaderWrapper, Content } from "./styles";
 
 interface CharacterDetailsProps {

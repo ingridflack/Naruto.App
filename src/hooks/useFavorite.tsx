@@ -5,9 +5,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Character } from "../pages";
-
 import { toast } from "react-toastify";
+
+import { Character } from "../pages";
 
 interface FavoriteProviderProps {
   children: ReactNode;
