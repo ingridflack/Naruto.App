@@ -47,6 +47,8 @@ const ranks = ["genin", "chuunin", "jounin", "kage", "unknown"].map((rank) => ({
 export const Home = ({ initialCharacters, villages }: HomeProps) => {
   const { characters, setCharacters, isLoading, setFilters } = useFilter();
 
+  const isFlex = isLoading || !characters.length;
+
   useEffect(() => {
     setCharacters(initialCharacters);
   }, [initialCharacters, setCharacters]);
@@ -81,7 +83,7 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
             <Filter data={villages} labelText="village" />
             <Filter data={ranks} labelText="rank" />
           </FiltersContainer>
-          <CharactersWrapper isFlex={isLoading}>
+          <CharactersWrapper isFlex={isFlex}>
             {renderContent()}
           </CharactersWrapper>
         </main>
@@ -93,7 +95,6 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
             breakLabel="..."
             breakClassName="break-me"
             pageCount={10}
-            // total / 10
             marginPagesDisplayed={1}
             pageRangeDisplayed={2}
             onPageChange={handleChangePageClick}
