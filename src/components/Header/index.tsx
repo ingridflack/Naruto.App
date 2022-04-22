@@ -8,6 +8,7 @@ import debounce from "lodash.debounce";
 
 import { Filters, useFilter } from "../../contexts/filter";
 import { Container } from "../../pages/styles";
+import NavBar from "./NavBar";
 import * as S from "./styles";
 
 const Header = () => {
@@ -58,14 +59,7 @@ const Header = () => {
             <AiOutlineSearch />
           </div>
 
-          <S.Menu>
-            <Link href={"/"} passHref>
-              <a>Home</a>
-            </Link>
-            <Link href={"/favorites"}>
-              <a>Favorites</a>
-            </Link>
-          </S.Menu>
+          <NavBar />
         </S.HeaderWrapper>
       </Container>
     </S.Container>

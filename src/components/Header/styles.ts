@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import MobileNavigation from "./MobileNavigation";
 
 export const Container = styled.header`
   background-color: ${({ theme }) => theme.colors.gray.dark};
@@ -16,6 +17,7 @@ export const HeaderWrapper = styled.div`
   .input-wrapper {
     position: relative;
     width: 400px;
+
     svg {
       position: absolute;
       top: 50%;
@@ -41,8 +43,25 @@ export const Input = styled.input`
   }
 `;
 
-export const Menu = styled.nav`
-  width: 200px;
+export const Navbar = styled.div`
+  position: relative;
+`;
+
+export const ToggleMenuButton = styled.button`
+  border: none;
+  color: #fff;
+  padding: 10px;
+
+  @media (min-width: 992px) {
+    display: none;
+  }
+`;
+
+interface IMenu {
+  show?: boolean;
+}
+
+export const Menu = styled.nav<IMenu>`
   a {
     color: ${({ theme }) => theme.colors.background};
     font-size: ${({ theme }) => theme.fontSize.medium};
@@ -55,5 +74,30 @@ export const Menu = styled.nav`
 
   a + a {
     margin-left: 1rem;
+  }
+
+  @media (max-width: 991px) {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: ${({ theme }) => theme.colors.background};
+    display: ${({ show }) => (show ? "flex" : "none")};
+    padding: 10px;
+    flex-direction: column;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+
+    a {
+      padding: 10px;
+      min-width: 100px;
+      color: ${({ theme }) => theme.colors.gray.dark};
+    }
+
+    a + a {
+      margin-left: 0;
+    }
+  }
+
+  @media (min-width: 992px) {
+    display: flex;
   }
 `;
