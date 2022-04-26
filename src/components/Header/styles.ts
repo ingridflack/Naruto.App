@@ -1,32 +1,7 @@
 import styled, { css } from "styled-components";
-import MobileNavigation from "./MobileNavigation";
 
 export const Container = styled.header`
   background-color: ${({ theme }) => theme.colors.gray.dark};
-`;
-
-export const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .image-wrapper {
-    cursor: pointer;
-  }
-
-  .input-wrapper {
-    position: relative;
-    width: 400px;
-
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 1rem;
-      transform: translateY(-50%);
-      color: ${({ theme }) => theme.colors.gray.silver};
-      font-size: ${({ theme }) => theme.fontSize.normal};
-    }
-  }
 `;
 
 export const Input = styled.input`
@@ -99,5 +74,49 @@ export const Menu = styled.nav<IMenu>`
 
   @media (min-width: 992px) {
     display: flex;
+  }
+`;
+
+export const HeaderWrapper = styled.div`
+  /* display: flex;
+  align-items: center;
+  justify-content: space-between; */
+
+  display: grid;
+  align-items: flex-end;
+  grid-template-areas: "logo navbar" "input input";
+  row-gap: 20px;
+
+  @media (min-width: 569px) {
+    align-items: center;
+    grid-template-areas: "logo input navbar";
+  }
+
+  ${Navbar} {
+    grid-area: navbar;
+    justify-self: flex-end;
+  }
+
+  .image-wrapper {
+    cursor: pointer;
+    grid-area: logo;
+  }
+
+  .input-wrapper {
+    grid-area: input;
+    position: relative;
+
+    @media (min-width: 569px) {
+      max-width: 400px;
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: ${({ theme }) => theme.colors.gray.silver};
+      font-size: ${({ theme }) => theme.fontSize.normal};
+    }
   }
 `;
