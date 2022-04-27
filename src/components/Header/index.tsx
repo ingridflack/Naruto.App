@@ -45,7 +45,7 @@ const Header = () => {
         <S.HeaderWrapper>
           <Link href={"/"} passHref>
             <a className="image-wrapper">
-              <Image
+              <S.Image
                 src="/naruto_logo.svg"
                 width={125}
                 height={53}

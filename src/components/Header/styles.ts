@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import NextImage from "next/image";
 
 export const Container = styled.header`
   background-color: ${({ theme }) => theme.colors.gray.dark};
@@ -77,14 +78,12 @@ export const Menu = styled.nav<IMenu>`
   }
 `;
 
-export const HeaderWrapper = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between; */
+export const Image = styled(NextImage)``;
 
+export const HeaderWrapper = styled.div`
   display: grid;
-  align-items: flex-end;
-  grid-template-areas: "logo navbar" "input input";
+  align-items: center;
+  grid-template-areas: "logo" "input";
   row-gap: 20px;
 
   @media (min-width: 569px) {
@@ -95,11 +94,23 @@ export const HeaderWrapper = styled.div`
   ${Navbar} {
     grid-area: navbar;
     justify-self: flex-end;
+
+    @media (max-width: 569px) {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
   }
 
   .image-wrapper {
     cursor: pointer;
     grid-area: logo;
+
+    @media (max-width: 569px) {
+      justify-self: center;
+      width: 80px;
+      height: 34px;
+    }
   }
 
   .input-wrapper {

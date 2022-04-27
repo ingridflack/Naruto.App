@@ -5,6 +5,10 @@ export const Container = styled.div`
   max-width: 1020px;
   padding: 2rem;
   width: 100%;
+
+  @media (max-width: 569px) {
+    padding: 1rem;
+  }
 `;
 
 export const FiltersContainer = styled.div`
@@ -13,6 +17,16 @@ export const FiltersContainer = styled.div`
 
   div + div {
     margin-left: 1rem;
+  }
+
+  @media (max-width: 569px) {
+    flex-direction: column;
+    align-items: center;
+
+    div + div {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
   }
 `;
 
