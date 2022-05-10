@@ -28,10 +28,9 @@ Naruto App is a project created to improve my frontend developer skills. To get 
 - Filter by rank, name and village
 - See all Naruto characters
 - Add and remove from favorites (It will be persisted on LocalStorage)
+- Responsive layout
 
 ## Features in progress
 
 - Unit tests
 - E2E tests
-- Add and remove from favorites (It will be persisted on LocalStorage)
-- Responsive layout

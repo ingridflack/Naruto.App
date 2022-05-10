@@ -5,11 +5,12 @@ import Head from "next/head";
 
 import { Character } from "../..";
 import { ImageContainer } from "../../../components/CharacterCard/styles";
+import Header from "../../../components/Header";
 import Image from "../../../components/Image";
 import { useFavorite } from "../../../hooks/useFavorite";
 import { getCharacter } from "../../../services";
 import { Container } from "../../styles";
-import { Header, Info, Button, HeaderWrapper, Content } from "./styles";
+import { Main, Info, Button, HeaderWrapper, Content } from "./styles";
 
 interface CharacterDetailsProps {
   character: Character;
@@ -41,7 +42,9 @@ export const CharacterDetails = ({ character }: CharacterDetailsProps) => {
         <title>Details | Naruto.app</title>
       </Head>
 
-      <Header>
+      <Header showInput={false} />
+
+      <Main>
         <Container>
           <HeaderWrapper>
             <ImageContainer>
@@ -70,7 +73,7 @@ export const CharacterDetails = ({ character }: CharacterDetailsProps) => {
             </Info>
           </HeaderWrapper>
         </Container>
-      </Header>
+      </Main>
 
       <Container>
         <Content>
@@ -99,7 +102,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: any) {
   const { id } = params;
 
   try {

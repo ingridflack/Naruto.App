@@ -18,7 +18,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <FilterProvider>
         <FavoriteProvider>
           <GlobalStyle />
-          <Header />
 
           <Component {...pageProps} />
           <ToastContainer limit={3} autoClose={4000} />

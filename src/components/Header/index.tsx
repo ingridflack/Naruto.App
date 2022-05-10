@@ -11,8 +11,13 @@ import { Container } from "../../pages/styles";
 import NavBar from "./NavBar";
 import * as S from "./styles";
 
-const Header = () => {
+interface HeaderProps {
+  showInput?: boolean;
+}
+
+const Header = ({ showInput = true }: HeaderProps) => {
   const [search, setSearch] = useState("");
+
   const { setFilters } = useFilter();
 
   const handleSetFilters = useCallback(
@@ -54,10 +59,16 @@ const Header = () => {
             </a>
           </Link>
 
-          <div className="input-wrapper">
-            <S.Input onChange={handleInputChange} value={search} />
-            <AiOutlineSearch />
-          </div>
+          {showInput && (
+            <div className="input-wrapper">
+              <S.Input
+                onChange={handleInputChange}
+                value={search}
+                placeholder="Search"
+              />
+              <AiOutlineSearch />
+            </div>
+          )}
 
           <NavBar />
         </S.HeaderWrapper>

@@ -6,7 +6,8 @@ import Head from "next/head";
 import Alert from "../components/Alert";
 import CharacterCard from "../components/CharacterCard";
 import Filter from "../components/Filter";
-import { Filters, useFilter } from "../contexts/filter";
+import Header from "../components/Header";
+import { Filters, Pagination, useFilter } from "../contexts/filter";
 import { getAllCharacters, getAllVillages } from "../services";
 import {
   Container,
@@ -37,6 +38,7 @@ export interface Character {
 interface HomeProps {
   villages: Village[];
   initialCharacters: Character[];
+  initialPagination: Pagination[];
 }
 
 const ranks = ["genin", "chuunin", "jounin", "kage", "unknown"].map((rank) => ({
@@ -44,14 +46,28 @@ const ranks = ["genin", "chuunin", "jounin", "kage", "unknown"].map((rank) => ({
   _id: rank,
 }));
 
-export const Home = ({ initialCharacters, villages }: HomeProps) => {
-  const { characters, setCharacters, isLoading, setFilters } = useFilter();
+export const Home = ({
+  initialCharacters,
+  villages,
+  initialPagination,
+}: HomeProps) => {
+  const {
+    characters,
+    setCharacters,
+    isLoading,
+    setFilters,
+    paginationInfo,
+    setPaginationInfo,
+  } = useFilter();
 
   const isFlex = isLoading || !characters.length;
 
+  console.log(characters, paginationInfo);
+
   useEffect(() => {
     setCharacters(initialCharacters);
-  }, [initialCharacters, setCharacters]);
+    setPaginationInfo(initialPagination);
+  }, [initialCharacters, initialPagination, setCharacters, setPaginationInfo]);
 
   const renderContent = () => {
     if (isLoading) return <p>Loading...</p>;
@@ -77,6 +93,8 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
       <Head>
         <title>Home | Naruto.app</title>
       </Head>
+
+      <Header />
       <Container>
         <main>
           <FiltersContainer>
@@ -88,20 +106,22 @@ export const Home = ({ initialCharacters, villages }: HomeProps) => {
           </CharactersWrapper>
         </main>
 
-        <PaginationContainer>
-          <ReactPaginate
-            previousLabel="Previous"
-            nextLabel="Next"
-            breakLabel="..."
-            breakClassName="break-me"
-            pageCount={10}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={2}
-            onPageChange={handleChangePageClick}
-            containerClassName="pagination"
-            activeClassName="active"
-          />
-        </PaginationContainer>
+        {!isFlex && (
+          <PaginationContainer>
+            <ReactPaginate
+              previousLabel="Previous"
+              nextLabel="Next"
+              breakLabel="..."
+              breakClassName="break-me"
+              pageCount={paginationInfo.pages}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={2}
+              onPageChange={handleChangePageClick}
+              containerClassName="pagination"
+              activeClassName="active"
+            />
+          </PaginationContainer>
+        )}
       </Container>
     </>
   );
@@ -116,9 +136,12 @@ export async function getStaticProps() {
     data: { characters },
   } = await getAllCharacters();
 
+  console.log(characters);
+
   return {
     props: {
       villages: villages.results,
+      initialPagination: characters.info,
       initialCharacters: characters.results,
     },
   };

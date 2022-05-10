@@ -34,7 +34,7 @@ const Filter = ({ data, labelText }: FilterProps) => {
     <Container>
       <Label htmlFor={labelText}>Filter by {labelText}</Label>
       <Select id={labelText} onChange={handleFilterChange} value={filterValue}>
-        <option>Choose a {labelText}</option>
+        <option value="">Choose a {labelText}</option>
 
         {data.map((option) => (
           <option key={option._id}>{option.name}</option>

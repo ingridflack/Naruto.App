@@ -21,6 +21,8 @@ interface FilterContextData {
   filters?: Filters;
   setFilters: Dispatch<SetStateAction<Filters | undefined>>;
   isLoading: boolean;
+  paginationInfo: any;
+  setPaginationInfo: any;
 }
 
 export interface Filters {
@@ -30,12 +32,25 @@ export interface Filters {
   page: number;
 }
 
+export interface Pagination {
+  count?: number;
+  pages?: number;
+  next?: number;
+  prev?: number;
+}
+
 const FilterContext = createContext<FilterContextData>({} as FilterContextData);
 
 export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [paginationInfo, setPaginationInfo] = useState<Pagination | null>({
+    count: 1,
+    pages: 1,
+  });
   const [filters, setFilters] = useState<Filters | undefined>();
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(paginationInfo);
 
   useEffect(() => {
     (async function () {
@@ -44,8 +59,13 @@ export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
       try {
         setIsLoading(true);
 
-        const data = await filterCharacters(filters);
-        setCharacters(data.data.characters.results);
+        const { data } = await filterCharacters(filters);
+        const { results, info } = data.characters;
+
+        console.log(data, info);
+
+        setCharacters(results);
+        setPaginationInfo(info);
       } catch (e) {
         console.error({ e });
       } finally {
@@ -62,6 +82,8 @@ export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
         filters,
         setFilters,
         isLoading,
+        paginationInfo,
+        setPaginationInfo,
       }}
     >
       {children}
