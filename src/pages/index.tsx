@@ -8,32 +8,14 @@ import CharacterCard from "../components/CharacterCard";
 import Filter from "../components/Filter";
 import Header from "../components/Header";
 import { Filters, Pagination, useFilter } from "../contexts/filter";
+import { Character, Village } from "../interfaces";
 import { getAllCharacters, getAllVillages } from "../services";
 import {
   Container,
   FiltersContainer,
   CharactersWrapper,
   PaginationContainer,
-} from "./styles";
-
-export interface Village {
-  name: string;
-  _id: string;
-}
-
-export interface Character {
-  _id: string;
-  name: string;
-  avatarSrc: string;
-  description: string;
-  firstAnimeAppearance: string;
-  firstMangaAppearance: string;
-  nameMeaning: string;
-  notableFeatures: string;
-  rank: string;
-  village: string;
-  age: string;
-}
+} from "../styles/shared";
 
 interface HomeProps {
   villages: Village[];

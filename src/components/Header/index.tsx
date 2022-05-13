@@ -1,13 +1,12 @@
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import debounce from "lodash.debounce";
 
 import { Filters, useFilter } from "../../contexts/filter";
-import { Container } from "../../pages/styles";
+import { Container } from "../../styles/shared";
 import NavBar from "./NavBar";
 import * as S from "./styles";
 
