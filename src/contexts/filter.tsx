@@ -50,8 +50,6 @@ export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
   const [filters, setFilters] = useState<Filters | undefined>();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(paginationInfo);
-
   useEffect(() => {
     (async function () {
       if (!filters) return;
@@ -61,8 +59,6 @@ export function FilterProvider({ children }: FilterProviderProps): JSX.Element {
 
         const { data } = await filterCharacters(filters);
         const { results, info } = data.characters;
-
-        console.log(data, info);
 
         setCharacters(results);
         setPaginationInfo(info);

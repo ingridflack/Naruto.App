@@ -62,8 +62,6 @@ export const Home = ({
 
   const isFlex = isLoading || !characters.length;
 
-  console.log(characters, paginationInfo);
-
   useEffect(() => {
     setCharacters(initialCharacters);
     setPaginationInfo(initialPagination);
@@ -135,8 +133,6 @@ export async function getStaticProps() {
   const {
     data: { characters },
   } = await getAllCharacters();
-
-  console.log(characters);
 
   return {
     props: {
