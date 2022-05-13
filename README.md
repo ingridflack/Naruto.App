@@ -1,6 +1,7 @@
 ## About the Project
 
-Naruto App is a project created to improve my frontend developer skills. To get data, I use the [NarutoQL](https://www.narutoql.com/docs) API.
+Naruto App is a project created to improve my frontend developer skills. To get data, I use the [NarutoQL](https://www.narutoql.com/docs) API. 
+[Click here](https://naruto-app.vercel.app/) to visit the app.
 
 ### Built With
 
