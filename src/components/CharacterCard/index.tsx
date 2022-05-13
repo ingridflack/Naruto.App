@@ -10,7 +10,7 @@ import { GiVillage } from "react-icons/gi";
 import Link from "next/link";
 
 import { useFavorite } from "../../hooks/useFavorite";
-import { Character } from "../../pages";
+import { Character } from "../../interfaces";
 import Image from "../Image";
 import * as S from "./styles";
 

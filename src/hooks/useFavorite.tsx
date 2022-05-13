@@ -7,7 +7,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 
-import { Character } from "../pages";
+import { Character } from "../interfaces";
 
 interface FavoriteProviderProps {
   children: ReactNode;

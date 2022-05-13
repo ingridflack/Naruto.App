@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { Character } from "../pages";
+import { Character } from "../interfaces";
 import { filterCharacters } from "../services";
 
 interface FilterProviderProps {
